@@ -1,7 +1,10 @@
 # congenial-carnival
-nextEpisode: Helper functions
+TheTvDbEpisode: Wrapper around TheTVDB API
 
-episodes: Get summary for last and next episode of favourite or specific series
+amazonEC2: Get summary and send SMS
 
-formula1: Get details about Grand Prix - Results, Drivers Standings, Constructors Standings  
-This part is not yet complete!
+nextEpisode:  Get summary for last and next episode of favourite or specific series
+
+weatherAlarm: Send SMS alert if there is a weather warning
+
+weatherForecast: Send daily weather updates
