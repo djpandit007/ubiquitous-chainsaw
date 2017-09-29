@@ -2,14 +2,16 @@
 import requests
 import json
 import boto3
+import yaml
 from datetime import datetime
 
 def getApiKey():
     # Returns API Key for AccuWeather API
     try:
-	credentials = open("AccuWeatherCredentials.txt", "r")
-	apiKey = credentials.readline().strip()
-	credentials.close()
+        with open("credentials.yml", "r") as ymlfile:
+            fileContent = yaml.load(ymlfile)
+	apiKey = fileContent["accuweather-key"].strip()
+	ymlfile.close()
 	return apiKey
     except IOError:
 	print "The file with weather credentials was not found!"
@@ -17,9 +19,10 @@ def getApiKey():
 def getPhoneNumber():
     # Returns phone number as string
     try:
-	contact = open("contact.txt", "r")
-	mobilePhone = contact.readline().strip()
-	contact.close()
+        with open("credentials.yml", "r") as ymlfile:
+            fileContent = yaml.load(ymlfile)
+	mobilePhone = str(fileContent["phone-number"]).strip()
+	ymlfile.close()
 	return mobilePhone
     except IOError:
 	print "The file with contact details is not found"

@@ -1,21 +1,23 @@
 import requests
 import json
-from pprint import pprint
 import boto3
+import yaml
+from pprint import pprint
 
 APIURL = "https://api.thetvdb.com"
 
 def getCredentials():
     # Returns dictionary with credentials
     try:
-        credentials = open("credentials.txt", "r")
-        apiKey = credentials.readline().strip()
+        with open("credentials.yml", "r") as ymlfile:
+            fileContent = yaml.load(ymlfile)
+        apiKey = fileContent["thetvdb-key"]
         assert len(apiKey) == 16, "Invalid API Key"
-        userName = credentials.readline().strip()
+        userName = fileContent["username"]
         assert len(userName) == 11, "Invalid username"
-        userKey = credentials.readline().strip()
+        userKey = fileContent["user-key"]
         assert len(userKey) == 16, "Invalid user key"
-        credentials.close()
+        ymlfile.close()
         return {"apikey": apiKey, "username": userName, "userkey": userKey}
     except IOError:
         print "The file with API key not found!"
@@ -23,10 +25,11 @@ def getCredentials():
 def getContactDetails():
     # Returns phone number as string
     try:
-        contact = open("contact.txt", "r")
-        mobilePhone = contact.readline().strip()
-        assert len(mobilePhone) == 12, "Invalid API Key"
-	contact.close()
+        with open("credentials.yml", "r") as ymlfile:
+            fileContent = yaml.load(ymlfile)
+        mobilePhone = str(fileContent["phone-number"]).strip()
+        assert len(mobilePhone) == 12, "Invalid phone number"
+	ymlfile.close()
         return mobilePhone
     except IOError:
         print "The file with contact details not found!"
