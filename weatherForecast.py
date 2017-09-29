@@ -35,7 +35,8 @@ weatherForecastURL = "http://dataservice.accuweather.com/forecasts/v1/daily/1day
 weatherForecast = requests.get(weatherForecastURL, params={"apikey": apiKey, "language": "en-us", "details": True, "metric": True})
 response = json.loads(weatherForecast.content)
 
-message = "Weather Severity: "
+message = str(datetime.now().strftime("%A, %d %B %Y"))
+message += "\nWeather Severity: "
 
 severity = int(response["Headline"]["Severity"])
 
