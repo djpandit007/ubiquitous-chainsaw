@@ -5,4 +5,6 @@ amazonEC2: Get summary and send SMS
 
 nextEpisode:  Get summary for last and next episode of favourite or specific series
 
-weatherForecast: Send daily weather updates
+weatherForecast: Send daily weather updates  
+
+favSeries: Use TV Maze API to get information about my favourite series
