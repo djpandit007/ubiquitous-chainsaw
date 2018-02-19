@@ -90,5 +90,4 @@ message += "Ice: " + str(nightIce["Value"]) + str(nightIce["Unit"]) + "  "
 
 sns_client = boto3.client("sns", "us-west-2")
 mobileNumber = getPhoneNumber()
-smsResponse = sns_client.publish(PhoneNumber=mobileNumber, Subject="Weather Forecast", Message=message)
-print str(today) + ". " + str(smsResponse["ResponseMetadata"]["HTTPStatusCode"]) 
+sns_client.publish(PhoneNumber=mobileNumber, Subject="Weather Forecast", Message=message)

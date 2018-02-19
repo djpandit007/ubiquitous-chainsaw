@@ -9,7 +9,7 @@ import boto3
 
 todaysDate = str(datetime.now().date())
 episodeToday = False
-sendMessage = "Series airing today:\n"
+#sendMessage = "Series airing today:\n"
 APIURL = "http://api.tvmaze.com"
 
 def getFavSeries():
@@ -76,8 +76,9 @@ for seriesId, seriesName in myFavourites:
         episodeToday = True
         epName, epSummary, airTime = getNameSummaryAirtime(content[0])
         epName, epSummary = sanitize(epName), sanitize(epSummary)
-        sendMessage += "%s airs at %s.\nEpisode Name: %s\nSummary: %s\n\n" % (str(sanitizeTitle(seriesName)), airTime, epName, epSummary)
-if episodeToday:
-    sendSMS(sendMessage)
-else:
+        #sendMessage += "%s airs at %s.\nEpisode Name: %s\nSummary: %s\n\n" % (str(sanitizeTitle(seriesName)), airTime, epName, epSummary)
+        sendSMS("%s airs at %s.\nEpisode Name: %s\nSummary: %s\n\n" % (str(sanitizeTitle(seriesName)), airTime, epName, epSummary))
+#if episodeToday:
+#    sendSMS(sendMessage)
+if not episodeToday:
     sendSMS("No series airing today")
